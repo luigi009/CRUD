@@ -21,6 +21,26 @@ function Read() {
         })
     }, [])
 
+    const setID = (id, firstName, lastName) => {
+      localStorage.setItem('ID', id);
+      localStorage.setItem('firstName', firstName);
+      localStorage.setItem('lastName', lastName);
+    }
+
+  const getData = () => {
+    axios.get(`https://61e5ac4cc14c7a0017124de9.mockapi.io/CRUD`)
+    .then((response) => {
+        setData(response.data);
+    })
+  }
+
+  const onDelete = (id) => {
+    axios.delete(`https://61e5ac4cc14c7a0017124de9.mockapi.io/CRUD/${id}`)
+    .then((response) => {
+      getData();
+    })
+  }
+
   return (
     <div className="flex items-center flex-col justify-center">
       <TableContainer component={Paper}>
@@ -30,8 +50,8 @@ function Read() {
               <TableCell align="right">ID</TableCell>
               <TableCell align="right">First Name</TableCell>
               <TableCell align="right">Last Name</TableCell>
-              <TableCell align="right">Update</TableCell>
-              <TableCell align="right">Delete</TableCell>
+              <TableCell align="right"></TableCell>
+              <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -45,12 +65,12 @@ function Read() {
                 <TableCell align="right">{row?.lastName}</TableCell>
                 <TableCell>
                     <Link to='/update'>
-                        <Button variant="contained" color="success">Update</Button>
+                        <Button onClick={() => setID(row.id, row.firstName, row.lastName)} variant="contained" color="success">Update</Button>
                     </Link>
                 </TableCell>
                 <TableCell>
                     <Link to='/delete'>
-                        <Button variant="contained" color="error">Delete</Button>
+                        <Button onClick={() => {onDelete(row.id)}} variant="contained" color="error">Delete</Button>
                     </Link>
                 </TableCell>
               </TableRow>
@@ -59,7 +79,7 @@ function Read() {
         </Table>
       </TableContainer>
 
-      <Link to='/'>Create</Link>
+      <Link to='/' className="bg-sky-600 text-white p-2 mt-2 rounded-md">Create</Link>
     </div>
   );
 }

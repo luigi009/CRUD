@@ -17,10 +17,14 @@ function Create() {
         }
 
         axios.post(`https://61e5ac4cc14c7a0017124de9.mockapi.io/CRUD`, body)
+        .then(() => {
+            window.location.assign('/read');
+        })
     }
 
     return (
-        <div>
+
+        <div className='flex flex-col justify-center items-center'>
             <Form className='flex flex-col'>
                 <div className='mb-4'>
                     <TextField id="standard-basic" onChange={(e) => setFirstName(e.target.value)} label="First Name" variant="standard" />
@@ -33,7 +37,7 @@ function Create() {
                 <Button variant="contained" onClick={sendDataToAPI} type='submit'>Submit</Button>
             </Form>
 
-            <Link to='/read'>Read</Link>
+            <Link to='/read' className='bg-indigo-600 text-white p-2 mt-2 rounded-md'>Read</Link>
         </div>
     )
 }

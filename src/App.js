@@ -10,7 +10,7 @@ function App() {
     <>
       <div className="flex items-center flex-col h-screen justify-center">
         <div>
-          <h3 className="text-2xl font-bold">React CRUD Oparation</h3>
+          <h3 className="text-2xl font-bold mb-4">React CRUD</h3>
         </div>
 
         <BrowserRouter>
